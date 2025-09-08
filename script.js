@@ -121,4 +121,79 @@ function sendMail(){
         });
 
 
+
+//////////////////// Neuron animation//////////////////////
+
+const canvas = document.getElementById("neuronCanvas");
+const ctx = canvas.getContext("2d");
+
+// Resize canvas to full screen
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+// Neuron particles
+const neurons = [];
+const neuronCount = 60;
+
+for (let i = 0; i < neuronCount; i++) {
+    neurons.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.7,
+        vy: (Math.random() - 0.5) * 0.7,
+        radius: 2 + Math.random() * 2,
+    });
+}
+
+// Animation loop
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw neurons
+    for (let i = 0; i < neuronCount; i++) {
+        let n = neurons[i];
+
+        // Move
+        n.x += n.vx;
+        n.y += n.vy;
+
+        // Bounce off edges
+        if (n.x < 0 || n.x > canvas.width) n.vx *= -1;
+        if (n.y < 0 || n.y > canvas.height) n.vy *= -1;
+
+        // Draw neuron point
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
+        ctx.fillStyle = "#38bdf8"; // Cyan color
+        ctx.fill();
+    }
+
+    // Draw connections
+    for (let i = 0; i < neuronCount; i++) {
+        for (let j = i + 1; j < neuronCount; j++) {
+            let dx = neurons[i].x - neurons[j].x;
+            let dy = neurons[i].y - neurons[j].y;
+            let dist = Math.sqrt(dx * dx + dy * dy);
+
+            if (dist < 120) {
+                ctx.beginPath();
+                ctx.strokeStyle = "rgba(56,189,248," + (1 - dist / 120) + ")";
+                ctx.lineWidth = 1;
+                ctx.moveTo(neurons[i].x, neurons[i].y);
+                ctx.lineTo(neurons[j].x, neurons[j].y);
+                ctx.stroke();
+            }
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+
 document.getElementById('year').textContent = new Date().getFullYear();
