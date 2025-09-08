@@ -199,6 +199,18 @@ header .last-text p {
     color: #fff;
 }
 
+#neuronCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    background: transparent;
+    pointer-events: none;
+}
+
 .home h1 {
     font-size: 5rem;
     color: #fff;
@@ -1371,6 +1383,9 @@ header .last-text p {
     header .last-text p {
         margin-bottom: 2.5px;
     }
+    #neuronCanvas {
+        height: 110vh;
+    }
 }
 
 @media(max-width:991px) {
@@ -1397,6 +1412,10 @@ header .last-text p {
     .about-content {
         padding: 0 3rem;
     }
+
+    #neuronCanvas {
+        height: 110vh;
+    }
 }
 
 @media(max-width:768px) {
@@ -1417,11 +1436,19 @@ header .last-text p {
         margin: 3rem 0;
     }
 
+    #neuronCanvas {
+        height: 110vh;
+    }
+
 }
 
 @media(max-width:400px) {
     header {
         width: 100vw;
+    }
+
+    #neuronCanvas {
+        height: 110vh;
     }
 }
 
@@ -1430,4 +1457,9 @@ header .last-text p {
     .portfolio-grid {
         grid-template-columns: 1fr;
     }
+
+    #neuronCanvas {
+        height: 110vh;
+    }
+
 }
