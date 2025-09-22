@@ -1440,6 +1440,28 @@ header .last-text p {
         height: 110vh;
     }
 
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-date {
+        left: 30px;
+        transform: none;
+    }
+
+    .timeline-content {
+        width: calc(100% - 80px);
+        margin-left: 80px !important;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::before,
+    .timeline-item:nth-child(even) .timeline-content::before {
+        left: -15px;
+        right: auto;
+        border-right: 15px solid var(--white);
+        border-left: none;
+    }
+
 }
 
 @media(max-width:400px) {
@@ -1463,3 +1485,4 @@ header .last-text p {
     }
 
 }
+
